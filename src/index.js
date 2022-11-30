@@ -42,6 +42,16 @@ const resolvers = {
         return links[linkIndex]
       }
       return null
+    },
+    deleteLink: (parent, args) => {
+      let linkIndex = links.findIndex((obj) => obj.id === args.id)
+      let deletedLink = links[linkIndex]
+
+      if (linkIndex >= 0) {
+        links.splice(linkIndex, 1)
+        return deletedLink
+      }
+      return null
     }
   }
 }
