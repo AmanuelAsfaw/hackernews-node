@@ -20,7 +20,7 @@ const resolvers = {
     url: (parent) => parent.url,
   },
   Mutation: {
-    createPost: (parent, args) => {
+    createLink: (parent, args) => {
       let idCount = links.length
       const link = {
         id: `link-${idCount++}`,
@@ -29,6 +29,19 @@ const resolvers = {
       }
       links.push(link)
       return link
+    },
+    updateLink: (parent, args) => {
+      let linkIndex = links.findIndex((obj) => obj.id === args.id)
+
+      if (linkIndex >= 0){
+        if (args.description !== null)
+          links[linkIndex].description = args.description
+        if (args.url !== null)
+          links[linkIndex].url = args.url
+
+        return links[linkIndex]
+      }
+      return null
     }
   }
 }
